@@ -21,11 +21,11 @@ namespace basic_calculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static readonly Regex _regex = new Regex("[^0-9.]+"); //regex that matches disallowed text
         private Operations operations = new Operations();
         private double x = 0;
         private double y = 0;
         private bool isFirst = true;
+        private bool operationFinished = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -46,6 +46,13 @@ namespace basic_calculator
         private void btn_num_Click(object sender, RoutedEventArgs e)
         {
             var conv = sender as Button;
+
+            if (operationFinished)
+            {
+                output_block.Text = "0";
+                operationFinished = false;
+            }
+
             if (conv != null)
             {
                 var num = conv.Tag.ToString();
@@ -58,9 +65,18 @@ namespace basic_calculator
         private void clear_Click(object sender, RoutedEventArgs e)
         {
             output_block.Text = "0";
+            cur_operation_block.Text = "";
             isFirst = true;
-            x = 0; 
+            x = 0;
             y = 0;
+        }
+
+        private void CalculatorReset()
+        {
+            isFirst = true;
+            x = 0;
+            y = 0;
+            cur_operation_block.Text = "";
         }
 
         private void btn_dot_Click(object sender, RoutedEventArgs e)
@@ -89,8 +105,9 @@ namespace basic_calculator
             if (op == null) return;
 
             operations.ChangeOperation(op);
-            
-            if (!isFirst)
+            cur_operation_block.Text = operations.GetOperation.ToString();
+
+            if (isFirst)
             {
                 isFirst = false;
                 Double.TryParse(output_block.Text, out x);
@@ -102,7 +119,57 @@ namespace basic_calculator
         {
             if (isFirst) return;
 
+            if (Double.TryParse(output_block.Text, out y))
+            {
+                output_block.Text = Calculation.Calculate(x, y, operations).ToString();
+                CalculatorReset();
+                operationFinished = true;
+            }
+        }
 
+        private void percent_Click(object sender, RoutedEventArgs e)
+        {
+            if (isFirst)
+            {
+                if (!Double.TryParse(output_block.Text, out x)) return;
+                x = Calculation.ToDecimal(x);
+                output_block.Text = x.ToString();
+                return;
+            }
+
+            if (!Double.TryParse(output_block.Text, out y)) return;
+            y = Calculation.ToDecimal(y);
+            output_block.Text = y.ToString();
+        }
+
+        private void negate_Click(object sender, RoutedEventArgs e)
+        {
+            if (isFirst)
+            {
+                if (!Double.TryParse(output_block.Text, out x)) return;
+                x = Calculation.Negate(x);
+                output_block.Text = x.ToString();
+                return;
+            }
+
+            if (!Double.TryParse(output_block.Text, out y)) return;
+            y = Calculation.Negate(y);
+            output_block.Text = y.ToString();
+        }
+
+        private void undo_Click(object sender, RoutedEventArgs e)
+        {
+            if (output_block.Text.Length == 1)
+            {
+                if (output_block.Text[0] != '0')
+                {
+                    output_block.Text = "0";
+                    return;
+                }
+                return;
+            }
+
+            output_block.Text = output_block.Text.Remove(output_block.Text.Length - 1);
         }
     }
 }
