@@ -87,13 +87,6 @@ namespace basic_calculator
             output_block.Text += "."; 
         }
 
-        private void output_block_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (e.ToString() == null) return;
-
-            e.Handled = _regex.IsMatch(e.Handled.ToString());
-    }
-
         private void btn_operation_Click(object sender, RoutedEventArgs e)
         {
             var conv = sender as Button;
