@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Background="PaleGreen"
-        Title="Basic Calculator" Height="650" Width="480">
-    <Grid>
+        Title="Basic Calculator" Height="680" Width="480">
+    <Grid Height="680" Width="480">
         <Button x:Name="btn_one" Tag="1"  Content="1" Margin="24,231,345,281" Width="81" Height="72" FontWeight="Bold" FontSize="36" FontFamily="Bahnschrift SemiLight SemiCondensed" Click="btn_num_Click"/>
         <Button x:Name="btn_two" Tag="2" Content="2" Margin="110,231,259,281" Width="81" Height="72" FontWeight="Bold" FontSize="36" FontFamily="Bahnschrift SemiLight SemiCondensed" Click="btn_num_Click"/>
         <Button x:Name="btn_three" Tag="3" Content="3" Margin="196,231,173,281" Width="81" Height="72" FontWeight="Bold" FontSize="36" FontFamily="Bahnschrift SemiLight SemiCondensed" Click="btn_num_Click"/>
@@ -26,8 +26,10 @@
         <Button x:Name="subtract" Tag="-" Content="-" Margin="300,385,24,127" Height="72" Width="126" FontWeight="Bold" FontSize="36" FontFamily="Bahnschrift SemiLight SemiCondensed" Click="btn_operation_Click"/>
         <Button x:Name="add" Tag="+" Content="+" Margin="300,462,24,50" Height="72" Width="126" FontWeight="Bold" FontSize="36" FontFamily="Bahnschrift SemiLight SemiCondensed" Click="btn_operation_Click"/>
         <Button x:Name="clear" Content="CLR" Margin="24,154,345,358" Width="81" Height="72" FontWeight="Bold" FontSize="36" FontFamily="Bahnschrift SemiLight SemiCondensed" Click="clear_Click"/>
-        <Button x:Name="percent" Content="%" Margin="110,154,259,358" Width="81" Height="72" FontWeight="Bold" FontSize="36" FontFamily="Bahnschrift SemiLight SemiCondensed"/>
-        <Button x:Name="negate" Content="+/-" Margin="196,154,173,358" Width="81" Height="72" FontWeight="Bold" FontSize="36" FontFamily="Bahnschrift SemiLight SemiCondensed"/>
-        <TextBox x:Name="output_block" HorizontalAlignment="Center" Margin="0,57,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="402" Height="72" Cursor="No" FontSize="72" FontWeight="Bold" FontFamily="Bahnschrift SemiLight SemiCondensed" TextAlignment="Right" TextChanged="output_block_TextChanged"/>
+        <Button x:Name="percent" Content="%" Margin="110,154,259,358" Width="81" Height="72" FontWeight="Bold" FontSize="36" FontFamily="Bahnschrift SemiLight SemiCondensed" Click="percent_Click"/>
+        <Button x:Name="negate" Content="+/-" Margin="196,154,173,358" Width="81" Height="72" FontWeight="Bold" FontSize="36" FontFamily="Bahnschrift SemiLight SemiCondensed" Click="negate_Click"/>
+        <TextBox x:Name="output_block" HorizontalAlignment="Center" Margin="0,33,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="402" Height="72" Cursor="No" FontSize="72" FontWeight="Bold" FontFamily="Bahnschrift SemiLight SemiCondensed" TextAlignment="Right" IsReadOnly="True"/>
+        <TextBox x:Name="cur_operation_block" Margin="315,126,39,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="30" Cursor="No" FontSize="24" FontWeight="Bold" FontFamily="Bahnschrift SemiLight SemiCondensed" TextAlignment="Right" IsReadOnly="True"/>
+        <Button x:Name="undo" Height="72" Width="126" Content="UNDO" Margin="315,194,39,398" FontWeight="Bold" FontSize="24" FontFamily="Bahnschrift SemiLight SemiCondensed" Click="undo_Click"/>
     </Grid>
 </Window>
