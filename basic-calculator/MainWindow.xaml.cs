@@ -100,6 +100,7 @@ namespace basic_calculator
             operations.ChangeOperation(op);
             cur_operation_block.Text = operations.GetOperation.ToString();
 
+            // Checks if its first, to add input to variable X
             if (isFirst)
             {
                 isFirst = false;
@@ -111,7 +112,7 @@ namespace basic_calculator
         private void equals_Click(object sender, RoutedEventArgs e)
         {
             if (isFirst) return;
-
+            
             if (Double.TryParse(output_block.Text, out y))
             {
                 output_block.Text = Calculation.Calculate(x, y, operations).ToString();
