@@ -23,7 +23,7 @@ namespace basic_calculator
             Divide,
         }
 
-        public OperationsType Op { get { return op; } }
+        public OperationsType GetOperation { get { return op; } }
 
         public void ChangeOperation(string op)
         {
